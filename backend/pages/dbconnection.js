@@ -1,0 +1,16 @@
+const { MongoClient } = require("mongodb");
+
+const client = new MongoClient(process.env.MONGO_URL);
+
+let db;
+
+async function connectDB() {
+  if (!db) {
+    await client.connect();
+    console.log("MongoDB connected");
+    db = client.db("USER_INFO");
+  }
+  return db;
+}
+
+module.exports = connectDB;
