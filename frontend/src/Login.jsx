@@ -11,6 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const Emailofadmin = "admin@gmail.com"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -22,7 +23,12 @@ const Login = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("Logged in:", userCredential.user);
-      navigate("/");
+      console.log("User email:", email);
+      localStorage.setItem("userEmail", email);
+      if(email===Emailofadmin){
+        navigate("/admin/dashboard");
+      }else
+      navigate("/", { state: { email: email } });
     } catch (error) {
       window.alert("Login failed. Please check your credentials and try again."+ error.message);
       console.error("Error:", error.message);

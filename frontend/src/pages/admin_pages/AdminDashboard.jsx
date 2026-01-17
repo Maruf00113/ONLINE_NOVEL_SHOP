@@ -6,11 +6,14 @@ export default function AdminDashboard() {
     function addnovel() {
         navigate("/addnovel");
     }
-    function editnovel() {
-        navigate("/editnovel");
-    }
     function deletenovel() {
         navigate("/deletenovel");
+    }
+    function viewusers() {
+        navigate("/viewusers");
+    }
+    function updatenovel() {
+        navigate("/updatenovel");
     }
 
     return (
@@ -50,11 +53,11 @@ export default function AdminDashboard() {
                 <div className="bg-white rounded-lg p-6 shadow">
                     <h3 className="text-lg font-semibold mb-4">Manage Orders</h3>
                     <div className="flex flex-col gap-3">
-                        <button type="button" className="bg-blue-500 text-white py-2 rounded hover:bg-blue-700 active:bg-blue-600 cursor-pointer">
-                            👁 View Orders
+                        <button type="button" onClick={viewusers} className="bg-blue-500 text-white py-2 rounded hover:bg-blue-700 active:bg-blue-600 cursor-pointer">
+                            👁 View Users
                         </button>
-                        <button type="button" className="bg-green-500 text-white py-2 rounded hover:bg-green-700 active:bg-green-600 cursor-pointer">
-                            ✔ Update Status
+                        <button onClick={updatenovel} type="button" className="bg-green-500 text-white py-2 rounded hover:bg-green-700 active:bg-green-600 cursor-pointer">
+                            ✔ Update Novel
                         </button>
                     </div>
                 </div>

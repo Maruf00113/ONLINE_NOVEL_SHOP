@@ -81,6 +81,60 @@ app.post("/buynovel", async (req, res) => {
   }
 });
 
+/// create new user
+app.post("/addusers", async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    const db = await connectDB();
+    const users = db.collection("users");
+    const existingUser = await users.findOne({ email: email });
+    if (existingUser) {
+      return res.status(400).send({ message: "User already exists" });
+    }
+    const result = await users.insertOne({ name, email, purchasedNovels: [] });
+    res.send({ _id: result.insertedId, name, email, purchasedNovels: [] });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error creating user");
+  }
+});
+
+app.get("/users", async (req, res) => {
+  try {
+    const db = await connectDB();
+    const users = db.collection("users");
+    const data = await users.find({}).toArray();
+    res.send(data);
+  } catch (error) {
+    res.status(500).send("Error getting users");
+  }
+});
+
+app.put("/updatenovel/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { price } = req.body;
+    const db = await connectDB();
+    const novels = db.collection("novels");
+    const result = await novels.updateOne(
+      { _id: new mongodb.ObjectId(id) },
+      { $set: { price: price } }
+    );
+    if (result.modifiedCount === 1) {
+      res.send({ message: "Novel price updated successfully" });
+      console.log("Novel price updated successfully");
+    }
+    else {
+      res.status(404).send({ message: "Novel not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error updating novel price");
+  }
+});
+
 app.listen(3000, () => {
   console.log("http://localhost:3000");
 });
+
+//app.js backend

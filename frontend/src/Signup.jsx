@@ -7,12 +7,23 @@ import { useNavigate } from "react-router-dom";
 const Signup = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
     const navigate = useNavigate();
     const handleRegister = async (e) => {
         e.preventDefault();
         try {
             const userinfo = await createUserWithEmailAndPassword(auth, email, password);
             console.log("Registered:", userinfo.user);
+            fetch("http://localhost:3000/addusers", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                })
+            });
             navigate("/login");
         } catch (error) {
             window.alert("Registration failed. Please try again." + error.message);
@@ -23,6 +34,14 @@ const Signup = () => {
     return (
         <div className="border px-5 py-7 rounded-md relative top-30 lg:top-60 sm:left-[30%] lg:left-[40%] left-[10%] flex flex-col w-100 text-center">
             <p className="text-4xl py-3">Sign up</p>
+            <input
+                className="border text-2xl rounded-md px-3 mt-3 hover:bg-yellow-100 hover:scale-105 duration-300"
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                required
+            />
             <input
                 className="border text-2xl rounded-md px-3 mt-3 hover:bg-yellow-100 hover:scale-105 duration-300"
                 type="email"

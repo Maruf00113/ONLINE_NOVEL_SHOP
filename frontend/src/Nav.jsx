@@ -17,7 +17,6 @@ const Navbar =()=>
                     <Link to="/">Home</Link>  
                     <Link to="/Login">Login</Link >
                     <Link to="/Signup">Sign up</Link >
-                    <Link to="/Dash">Dashboard</Link>
                     <Link to="/Contact">Contact</Link>
                     <Link to="/About">About</Link>
                 </div>
