@@ -11,7 +11,7 @@ function Home()
     useState = initially empty...
     */
     const [box, setter] = useState([]);
-    const email=localStorage.getItem("userEmail") || "";
+    const email=sessionStorage.getItem("userEmail") || "";
     console.log("Home page email:", email);
     useEffect(() => {
         // data fetch kore box e boshabo

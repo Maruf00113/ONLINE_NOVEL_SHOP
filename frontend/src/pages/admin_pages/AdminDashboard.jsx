@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -15,6 +16,12 @@ export default function AdminDashboard() {
     function updatenovel() {
         navigate("/updatenovel");
     }
+    const [novels, setNovels] = useState(0);
+    fetch("http://localhost:3000/")
+        .then((response) => response.json())
+        .then((data) => {
+            setNovels(data.length);
+    });
 
     return (
         <div className="min-h-screen bg-gray-100 pt-30">
@@ -24,7 +31,7 @@ export default function AdminDashboard() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
                 <div className="bg-blue-500 text-white rounded-lg p-6 text-center">
                     <h2 className="text-lg">Total Novels</h2>
-                    <p className="text-4xl font-bold mt-2">0</p>
+                    <p className="text-4xl font-bold mt-2"> {novels}</p>
                 </div>
 
                 <div className="bg-green-500 text-white rounded-lg p-6 text-center">

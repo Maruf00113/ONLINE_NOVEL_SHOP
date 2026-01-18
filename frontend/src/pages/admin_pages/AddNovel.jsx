@@ -1,5 +1,6 @@
-
+import { useNavigate } from "react-router-dom";
 const AddNovel = () => {
+    const Navigate = useNavigate();
     const addnovel = async (e) => {
         e.preventDefault();
         const form = e.target.form;
@@ -16,6 +17,7 @@ const AddNovel = () => {
             body: JSON.stringify({ author, image, paragraph, price, name }),
         });
         const data = await response.json();
+        Navigate('/admin/dashboard');
         console.log(data);
     }
     return (

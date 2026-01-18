@@ -39,8 +39,8 @@ const Editnovel = () => {
             console.log("Success response:", data);
             
             setNovel({ ...novel, price: newPrice });
-            
             window.alert("Price updated successfully!");
+            navigate("/admin/dashboard");
         })
         .catch((error) => {
             console.error("Error occurred:", error);
@@ -96,9 +96,6 @@ const Editnovel = () => {
                 </div>
 
                 <button
-                    onClick={()=>{
-                        navigate("/admin/dashboard")
-                    }}
                     type="submit"
                     className="w-full bg-blue-600 text-white py-2 rounded-xl hover:bg-blue-700 transition-colors"
                 >

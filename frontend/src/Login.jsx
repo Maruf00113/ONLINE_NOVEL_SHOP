@@ -24,7 +24,7 @@ const Login = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("Logged in:", userCredential.user);
       console.log("User email:", email);
-      localStorage.setItem("userEmail", email);
+      sessionStorage.setItem("userEmail", email);
       if(email===Emailofadmin){
         navigate("/admin/dashboard");
       }else

@@ -21,7 +21,7 @@ app.get("/", async (req, res) => {
 });
 
 /// when admin add nobel
-app.post("/addnobel", async(req, res) => {
+app.post("/addnovel", async(req, res) => {
     try {
         const {author, image, paragraph, price, name} = req.body;
         

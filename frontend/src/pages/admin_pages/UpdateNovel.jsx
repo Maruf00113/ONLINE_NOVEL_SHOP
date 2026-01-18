@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 const UpdateNovel = () => {
-    const Navigate = useNavigate();
     const [novels, setNovels] = useState([]);
     useEffect(() => {
         fetch("http://localhost:3000/")
